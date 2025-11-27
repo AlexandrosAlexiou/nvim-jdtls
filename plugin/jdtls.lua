@@ -5,9 +5,11 @@ vim.g.nvim_jdtls = 1
 
 local api = vim.api
 local group = api.nvim_create_augroup("jdtls", {})
+local handler_group = api.nvim_create_augroup("jdtls_handlers", {})
+
 for _, pattern in ipairs({"jdt://*", "*.class"}) do
   api.nvim_create_autocmd("BufReadCmd", {
-    group = group,
+    group = handler_group,
     pattern = pattern,
     ---@param args vim.api.keyset.create_autocmd.callback_args
     callback = function (args)
